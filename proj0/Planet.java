@@ -8,7 +8,7 @@ public class Planet{
   public double mass;
   public String imgFileName;
 
-  public static final double gravitationalConstant = 6.67e-11;
+  private static final double gravitationalConstant = 6.67e-11;
 
   public Planet(double xP, double yP, double xV,double yV, double m, String img){
     xxPos = xP;
@@ -26,10 +26,6 @@ public class Planet{
     yyVel = b.yyVel;
     mass = b.mass;
     imgFileName = b.imgFileName;
-  }
-
-  public boolean equals(Planet b){
-    return this.xxPos==b.xxPos && this.yyPos==b.yyPos && this.mass==b.mass;
   }
 
   public double calcDistance(Planet b){
