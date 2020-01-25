@@ -20,7 +20,7 @@ public class ArrayDeque<T> {
         T[] newItems = (T[]) new Object[capacity];
 
         int current = nextLast;
-        for(int i = 0; i < size; i++) {
+        for (int i = 0; i < size; i++) {
             newItems[i] = items[current];
             shiftRight(current);
         }
@@ -49,7 +49,7 @@ public class ArrayDeque<T> {
     }
     
     public void addFirst(T item) {
-        if(size == items.length) {
+        if (size == items.length) {
             resize(size * RESIZE_FACTOR);
         }
 
@@ -59,7 +59,7 @@ public class ArrayDeque<T> {
     }
 
     public void addLast(T item) {
-        if(size == items.length) {
+        if (size == items.length) {
             resize(size * RESIZE_FACTOR);
         }
         size++;
@@ -68,7 +68,7 @@ public class ArrayDeque<T> {
     }
 
     public T get(int index) {
-        if(index < 0 || index >= size) {
+        if (index < 0 || index >= size) {
             return null;
         }
         return items[index];
@@ -81,14 +81,14 @@ public class ArrayDeque<T> {
     public void printDeque() {
         int printPointer = shiftRight(nextFirst);
 
-        while(shiftRight(printPointer) != nextLast) {
+        while (shiftRight(printPointer) != nextLast) {
             System.out.print(items[printPointer] + " ");
             printPointer = shiftRight(printPointer);
         }
     }
 
     public T removeFirst() {
-        if(size == 0) {
+        if (size == 0) {
             return null;
         }
 
@@ -98,7 +98,7 @@ public class ArrayDeque<T> {
         items[toRemoveItemIndex] = null;
         nextFirst = shiftRight(nextFirst);
 
-        if(items.length > 16 && size / items.length < MIN_USAGE_RATIO) {
+        if (items.length > 16 && size / items.length < MIN_USAGE_RATIO) {
             resize(items.length / 2);
         }
 
@@ -107,7 +107,7 @@ public class ArrayDeque<T> {
     }
 
     public T removeLast() {
-        if(size == 0){
+        if (size == 0) {
             return null;
         }
 
@@ -117,7 +117,7 @@ public class ArrayDeque<T> {
         items[toRemoveItemIndex] = null;
         nextLast = shiftLeft(nextLast);
 
-        if(items.length > 16 && size / items.length < MIN_USAGE_RATIO) {
+        if (items.length > 16 && size / items.length < MIN_USAGE_RATIO) {
             resize(items.length / 2);
         }
 
