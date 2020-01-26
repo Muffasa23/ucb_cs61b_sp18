@@ -84,7 +84,7 @@ public class LinkedListDeque<T> {
         }
         Node ptr = sentinel;
         ptr = ptr.next;
-        int count = 1;
+        int count = 0;
 
         while (count < index) {
             ptr = ptr.next;

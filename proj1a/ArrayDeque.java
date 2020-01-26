@@ -22,7 +22,7 @@ public class ArrayDeque<T> {
         int current = nextLast;
         for (int i = 0; i < size; i++) {
             newItems[i] = items[current];
-            shiftRight(current);
+            current = shiftRight(current);
         }
 
         items = newItems;
@@ -73,7 +73,13 @@ public class ArrayDeque<T> {
         if (index < 0 || index >= size) {
             return null;
         }
-        return items[index];
+        int pointer = shiftRight(nextFirst);
+        while(index > 0) {
+            pointer = shiftRight(pointer);
+            index--;
+        }
+
+        return items[pointer];
     }
 
     public int size() {
