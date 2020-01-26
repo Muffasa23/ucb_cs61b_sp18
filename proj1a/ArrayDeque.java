@@ -41,11 +41,11 @@ public class ArrayDeque<T> {
     }
 
     private int shiftLeft(int index) {
-        if (index - 1 > 0) {
+        if (index - 1 >= 0) {
             index--;
             return index;
         }
-        index = size - 1;
+        index = items.length - 1;
 
         return index;
     }
