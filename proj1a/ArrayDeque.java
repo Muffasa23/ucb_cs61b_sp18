@@ -43,8 +43,8 @@ public class ArrayDeque<T> {
             resize(size * RESIZE_FACTOR);
         }
 
-        size++;
         items[nextFirst] = item;
+        size++;
         nextFirst = shiftLeft(nextFirst);
     }
 
@@ -52,13 +52,14 @@ public class ArrayDeque<T> {
         if (size == items.length) {
             resize(size * RESIZE_FACTOR);
         }
-        size++;
+        
         items[nextLast] = item;
+        size++;
         nextLast = shiftRight(nextLast);    
     }
 
     public T get(int index) {
-        if (index < 0 || index >= size) {
+        if (index < 0 || index > size) {
             return null;
         }
 
@@ -84,11 +85,11 @@ public class ArrayDeque<T> {
             return null;
         }
 
-        size--;
         int toRemoveItemIndex = shiftRight(nextFirst);
         T toRemoveItem = items[toRemoveItemIndex];
         items[toRemoveItemIndex] = null;
-        nextFirst = shiftRight(nextFirst);
+        nextFirst = toRemoveItemIndex;
+        size--;
 
         if (items.length >= 16 && size < items.length * MIN_USAGE_RATIO) {
             resize(items.length / 2);
@@ -103,11 +104,11 @@ public class ArrayDeque<T> {
             return null;
         }
 
-        size--;
         int toRemoveItemIndex = shiftLeft(nextLast);
         T toRemoveItem = items[toRemoveItemIndex];
         items[toRemoveItemIndex] = null;
-        nextLast = shiftLeft(nextLast);
+        nextLast = toRemoveItemIndex;
+        size--;
 
         if (items.length >= 16 && size < items.length * MIN_USAGE_RATIO) {
             resize(items.length / 2);
