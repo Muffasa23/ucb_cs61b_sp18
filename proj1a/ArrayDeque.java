@@ -32,22 +32,16 @@ public class ArrayDeque<T> {
 
     private int shiftRight(int index) {
         if (index + 1 < items.length) {
-            index++;
-            return index;
+            return index + 1;
         }
-        index = 0;
-
-        return index;
+        return 0;
     }
 
     private int shiftLeft(int index) {
         if (index - 1 >= 0) {
-            index--;
-            return index;
+            return index - 1;
         }
-        index = items.length - 1;
-
-        return index;
+        return items.length - 1;
     }
     
     public void addFirst(T item) {
@@ -74,7 +68,7 @@ public class ArrayDeque<T> {
             return null;
         }
         int pointer = shiftRight(nextFirst);
-        while (index > 0) {
+        while (index >= 0) {
             pointer = shiftRight(pointer);
             index--;
         }
@@ -89,7 +83,7 @@ public class ArrayDeque<T> {
     public void printDeque() {
         int printPointer = shiftRight(nextFirst);
 
-        while (shiftRight(printPointer) != nextLast) {
+        while (printPointer != nextLast) {
             System.out.print(items[printPointer] + " ");
             printPointer = shiftRight(printPointer);
         }
@@ -106,7 +100,7 @@ public class ArrayDeque<T> {
         items[toRemoveItemIndex] = null;
         nextFirst = shiftRight(nextFirst);
 
-        if (items.length > 16 && size / items.length < MIN_USAGE_RATIO) {
+        if (items.length >= 16 && size / items.length < MIN_USAGE_RATIO) {
             resize(items.length / 2);
         }
 
@@ -125,7 +119,7 @@ public class ArrayDeque<T> {
         items[toRemoveItemIndex] = null;
         nextLast = shiftLeft(nextLast);
 
-        if (items.length > 16 && size / items.length < MIN_USAGE_RATIO) {
+        if (items.length >= 16 && size / items.length < MIN_USAGE_RATIO) {
             resize(items.length / 2);
         }
 
