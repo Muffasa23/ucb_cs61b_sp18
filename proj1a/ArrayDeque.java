@@ -20,7 +20,7 @@ public class ArrayDeque<T> {
         T[] newItems = (T[]) new Object[capacity];
 
         int current = nextLast;
-        for (int i = 0; i < size - 1; i++) {
+        for (int i = 0; i < size; i++) {
             newItems[i] = items[current];
             current = shiftRight(current);
         }
@@ -41,7 +41,7 @@ public class ArrayDeque<T> {
     }
 
     private int shiftLeft(int index) {
-        if (index - 1 >= 0) {
+        if (index - 1 > 0) {
             index--;
             return index;
         }
