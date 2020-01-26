@@ -57,10 +57,11 @@ public class LinkedListDeque<T> {
             return null;
         }else {
             Node newFirst = sentinel.next.next;
+            Node removedNode = sentinel.next;
             newFirst.prev = sentinel;
             sentinel.next = newFirst;
             size--;
-            return sentinel.next.item;
+            return removedNode.item;
         }
     }
 
@@ -69,10 +70,11 @@ public class LinkedListDeque<T> {
             return null;
         }else {
             Node newLast = sentinel.prev.prev;
+            Node removedNode = sentinel.next;
             newLast.next = sentinel;
             sentinel.prev = newLast;
             size--;      
-            return sentinel.prev.item;
+            return removedNode.item;
         }
     }
 
