@@ -31,17 +31,11 @@ public class ArrayDeque<T> {
     }
 
     private int shiftRight(int index) {
-        if (index + 1 < items.length) {
-            return index + 1;
-        }
-        return 0;
+        return (index + 1) % items.length;
     }
 
     private int shiftLeft(int index) {
-        if (index - 1 >= 0) {
-            return index - 1;
-        }
-        return items.length - 1;
+        return (items.length + index - 1) % items.length;
     }
     
     public void addFirst(T item) {
@@ -67,13 +61,9 @@ public class ArrayDeque<T> {
         if (index < 0 || index >= size) {
             return null;
         }
-        int pointer = shiftRight(nextFirst);
-        while (index >= 0) {
-            pointer = shiftRight(pointer);
-            index--;
-        }
 
-        return items[pointer];
+        int position = (shiftRight(nextFirst) + index) % items.length;
+        return items[position];
     }
 
     public int size() {
@@ -100,7 +90,7 @@ public class ArrayDeque<T> {
         items[toRemoveItemIndex] = null;
         nextFirst = shiftRight(nextFirst);
 
-        if (items.length >= 16 && size / items.length < MIN_USAGE_RATIO) {
+        if (items.length >= 16 && size < items.length * MIN_USAGE_RATIO) {
             resize(items.length / 2);
         }
 
@@ -119,7 +109,7 @@ public class ArrayDeque<T> {
         items[toRemoveItemIndex] = null;
         nextLast = shiftLeft(nextLast);
 
-        if (items.length >= 16 && size / items.length < MIN_USAGE_RATIO) {
+        if (items.length >= 16 && size < items.length * MIN_USAGE_RATIO) {
             resize(items.length / 2);
         }
 
