@@ -33,6 +33,7 @@ public class ArrayDeque<T> {
     private int shiftRight(int index) {
         if (index + 1 <= size) {
             index++;
+            return index;
         }
         index = 0;
 
@@ -42,6 +43,7 @@ public class ArrayDeque<T> {
     private int shiftLeft(int index) {
         if (index - 1 >= 0) {
             index--;
+            return index;
         }
         index = size - 1;
 
