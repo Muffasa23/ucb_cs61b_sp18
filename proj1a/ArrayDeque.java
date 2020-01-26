@@ -19,7 +19,7 @@ public class ArrayDeque<T> {
     private void resize(int capacity) {
         T[] newItems = (T[]) new Object[capacity];
 
-        int current = nextLast;
+        int current = shiftRight(nextFirst);
         for (int i = 0; i < size; i++) {
             newItems[i] = items[current];
             current = shiftRight(current);
@@ -52,7 +52,7 @@ public class ArrayDeque<T> {
         if (size == items.length) {
             resize(size * RESIZE_FACTOR);
         }
-        
+
         items[nextLast] = item;
         size++;
         nextLast = shiftRight(nextLast);    
