@@ -10,6 +10,21 @@ public class IntListTest {
      * assertEquals knows how to handle IntLists just fine.
      */
 
+    /**
+     * Destructive Method, given null as result will return null
+     * @param A
+     * @return: the reverse of the given linklist
+     */
+    @Test (timeout = 1000)
+    public void testReverse() {
+        IntList A = IntList.of(1, 2, 3, 9, 7, 2, 4, 4, 8);
+        IntList ans = IntList.of(8, 4, 4, 2, 7, 9, 3, 2, 1);
+
+        assertEquals(IntList.reverse(A), ans);
+        assertNotEquals(A, IntList.reverse(A));
+        assertNull(IntList.reverse(null));
+    }
+
     @Test
     public void testList() {
         IntList one = new IntList(1, null);
